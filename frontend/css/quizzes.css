@@ -1,0 +1,23 @@
+.quizList{
+
+text-align: justify;
+overflow-y: auto;    
+overflow-x: hidden;
+
+
+}
+button{
+background-color: aqua;  
+  font-size: 30px;
+  text-align: center;
+ height: 50px;
+ width: 150px;
+
+}
+
+  
+.fas fa-user-alt{
+
+font-size: 36px;
+
+}

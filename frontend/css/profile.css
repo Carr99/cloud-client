@@ -1,0 +1,18 @@
+h1{
+
+justify-content: center;
+
+}
+
+.leftContainer{
+
+text-align: left;
+justify-content: left;
+
+}
+.rightContainer{
+justify-content: right;
+text-align: right;
+
+
+}
