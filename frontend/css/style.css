@@ -1,0 +1,14 @@
+body {
+  background-color: aliceblue;
+}
+
+section {
+  margin: 0 auto;
+  margin-top: 50px;
+  max-width: 780px;
+  background-color: #8097bc;
+  opacity: 0.95;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}

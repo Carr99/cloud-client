@@ -1,0 +1,35 @@
+.loginArticle {
+  background-color: aliceblue;
+  border-radius: 10px;
+  padding: 5px;
+  margin-bottom: 8px;
+}
+.loginInput {
+  border-radius: 10px;
+  margin: 5px;
+  padding: 5px;
+  width: 90%;
+  border: rgb(138, 158, 176) 1px solid;
+}
+.loginLabel {
+  margin: 5px;
+}
+#loginBtn {
+  margin: 5px;
+  background-color: transparent;
+  border-radius: 10px;
+  padding: 5px;
+  border: rgb(138, 158, 176) 2px solid;
+  
+}
+#loginBtn:hover {
+  background-color: rgb(195, 212, 227);
+  cursor: pointer;
+}
+#signupBtn {
+  margin: 5px;
+  text-decoration: none;
+  color: #000;
+  text-decoration: underline;
+  cursor: pointer;
+}

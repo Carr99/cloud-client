@@ -1,7 +1,7 @@
 async function router() {
   let route = location.pathname;
   // transform route to be a path to a partial
-  route = route === '/' ? '/start' : route;
+  route = route === '/' ? '/login' : route;
   route = '/partials' + route + '.html';
   // load the content from the partial
   let content = await (await fetch(route)).text();
@@ -11,6 +11,10 @@ async function router() {
   document.querySelector('main').innerHTML = content;
   // run the productLister function (in another file)
   // if the route is '/partials/products.html';
+  console.log(route)
+  if (route === '/partials/login.html') {
+    login();
+  }
 }
 
 // runt the router when using the back/forward buttons
