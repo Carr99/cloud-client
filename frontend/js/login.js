@@ -3,6 +3,7 @@ function login() {
       <div class="loginDiv">
       <h2>Login</h2>
       <article class="loginArticle">
+      <form name="login">
       <label class="loginLabel" for="emailInput" value="EMAIL">Email</label>
       </br>
       <input id="emailInput" class="loginInput" type="email" required></input>
@@ -12,15 +13,18 @@ function login() {
       <input id="passwordInput" class="loginInput" type="password" required></input>
       </br>
       <p id="errorText" style="color:red" hidden>Error, Try again!</p>
-      <button id="loginBtn">Log in</button><a id="signupBtn">Sign Up</a>
+      <button id="loginBtn" class="submitBtn">Log in</button><a id="signupBtn">Sign Up</a>
+      </form>
       </article>
       </div>
     `
-  document.querySelector("#loginBtn").addEventListener("click", function () {
+  document.querySelector("#loginBtn").addEventListener("click", function (event) {
+    event.preventDefault();
     loginClicked()
   })
   document.querySelector("#signupBtn").addEventListener("click", function () {
-    alert('buttonClicked')
+    history.pushState(null, null, '/register')
+    router()
   })
 }
 

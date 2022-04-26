@@ -14,7 +14,7 @@
 .loginLabel {
   margin: 5px;
 }
-#loginBtn {
+.submitBtn {
   margin: 5px;
   background-color: transparent;
   border-radius: 10px;
@@ -22,7 +22,7 @@
   border: rgb(138, 158, 176) 2px solid;
   
 }
-#loginBtn:hover {
+.submitBtn:hover {
   background-color: rgb(195, 212, 227);
   cursor: pointer;
 }

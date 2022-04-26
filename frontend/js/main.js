@@ -14,6 +14,8 @@ async function router() {
   console.log(route)
   if (route === '/partials/login.html') {
     login();
+  } else if (route === '/partials/register.html') {
+    register();
   }
 }
 
