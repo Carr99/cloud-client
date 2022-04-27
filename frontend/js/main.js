@@ -16,6 +16,8 @@ async function router() {
     login();
   } else if (route === '/partials/register.html') {
     register();
+  } else if (route === '/partials/admin.html') {
+    admin();
   }
 }
 

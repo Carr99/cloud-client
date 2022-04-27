@@ -1,8 +1,9 @@
 function login() {
+  checkLoggedIn()
+
   document.querySelector('.loginSection').innerHTML = `
-      <div class="loginDiv">
       <h2>Login</h2>
-      <article class="loginArticle">
+      <article class="article">
       <form name="login">
       <label class="loginLabel" for="emailInput" value="EMAIL">Email</label>
       </br>
@@ -16,7 +17,6 @@ function login() {
       <button id="loginBtn" class="submitBtn">Log in</button><a id="signupBtn">Sign Up</a>
       </form>
       </article>
-      </div>
     `
   document.querySelector("#loginBtn").addEventListener("click", function (event) {
     event.preventDefault();
@@ -26,6 +26,14 @@ function login() {
     history.pushState(null, null, '/register')
     router()
   })
+}
+
+async function checkLoggedIn() {
+  let rawData = await fetch('http://localhost:3002/login')
+  let result = await rawData.json()
+  console.log(rawData.status)
+  if (rawData.status !== 200) return
+  changeRoute(result.role)
 }
 
 async function loginClicked() {
@@ -52,9 +60,12 @@ async function loginClicked() {
       return
     }
   }
-
   document.getElementById('errorText').hidden = true
   //Redirect to new page
-  history.pushState(null, null, '/quizzes')
+  changeRoute(result.role)
+}
+
+function changeRoute(role) {
+  role == 'Admin' ? history.pushState(null, null, '/admin') : history.pushState(null, null, '/quizzes')
   router()
 }

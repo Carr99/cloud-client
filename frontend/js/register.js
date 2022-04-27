@@ -1,8 +1,7 @@
 function register() {
   document.querySelector('.registerSection').innerHTML = `
-      <div class="loginDiv">
       <h2>Register</h2>
-      <article class="loginArticle">
+      <article class="article">
       <form name="register">
       <label class="loginLabel" for="usernmaeInput">Username</label>
       </br>
@@ -24,7 +23,6 @@ function register() {
       <button id="submitBtn" class="submitBtn">Submit</button>
       </form>
       </article>
-      </div>
     `
   document.querySelector("#submitBtn").addEventListener("click", function (event) {
     event.preventDefault();
