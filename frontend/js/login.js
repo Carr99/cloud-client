@@ -31,7 +31,6 @@ function login() {
 async function checkLoggedIn() {
   let rawData = await fetch('http://localhost:3002/login')
   let result = await rawData.json()
-  console.log(rawData.status)
   if (rawData.status !== 200) return
   changeRoute(result.role)
 }

@@ -12,3 +12,29 @@ section {
   border-radius: 10px;
   margin-bottom: 10px;
 }
+
+table {
+  border-collapse: collapse;
+}
+
+th {
+  text-align: left;
+}
+
+tr {
+  background-color: white;
+  color: black;
+}
+
+tbody tr:nth-child(odd){
+  background-color: #eee;
+}
+
+
+th, td {
+  padding: 5px 10px;
+}
+
+th.number, td.number {
+  text-align: right;
+}
