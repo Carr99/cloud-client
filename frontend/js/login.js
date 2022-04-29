@@ -29,9 +29,9 @@ function login() {
 }
 
 async function checkLoggedIn() {
-  let rawData = await fetch('http://localhost:3002/login')
+  let rawData = await fetch('/api/login')
   let result = await rawData.json()
-  if (rawData.status !== 200) return
+  if (result._error) return
   changeRoute(result.role)
 }
 
@@ -42,9 +42,10 @@ async function loginClicked() {
 
   let result
   try {
-    result = await (await fetch('http://localhost:3002/login', {
+    result = await (await fetch('/api/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
+      withCredentials: true,
       body: JSON.stringify(data)
     })).json()
   }

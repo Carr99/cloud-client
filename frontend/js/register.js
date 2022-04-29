@@ -43,15 +43,13 @@ async function createUser() {
 
   let result
   try {
-    result = await (await fetch('http://localhost:3002/register', {
+    result = await (await fetch('/api/register', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
     })).json()
   }
   catch (ignore) { }
-
-  console.log(result)
 
   if (!result) {
     document.getElementById('errorText').hidden = false

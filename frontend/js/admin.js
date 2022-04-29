@@ -21,7 +21,7 @@ async function eventHandler(event) {
 
 async function renderQuizInfo() {
   let html = '<table><thead><tr><th>Quiz Name</th><th>Questions</th></tr></thead><tbody>'
-  let rawData = await fetch('http://localhost:3002/allQuizzes')
+  let rawData = await fetch('/api/allQuizzes')
   let result = await rawData.json()
   for (let quiz of result.quizzes) {
     html += '<tr><td>' + quiz.name + '</td><td>' + quiz.questions + '</td></tr>'
@@ -33,7 +33,7 @@ async function renderQuizInfo() {
 
 async function renderUserInfo() {
   let html = '<table><thead><tr><th>Username</th><th>Role</th></tr></thead><tbody>'
-  let rawData = await fetch('http://localhost:3002/allUsers')
+  let rawData = await fetch('/api/allUsers')
   let result = await rawData.json()
   for (let user of result.users) {
     html += '<tr><td>' + user.username + '</td><td>' + user.userRole + '</td></tr>'
