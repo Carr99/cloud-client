@@ -11,9 +11,12 @@ async function router() {
   document.querySelector('main').innerHTML = content;
   // run the productLister function (in another file)
   // if the route is '/partials/products.html';
-  console.log(route)
   if (route === '/partials/login.html') {
     login();
+  } else if (route === '/partials/register.html') {
+    register();
+  } else if (route === '/partials/admin.html') {
+    admin();
   }
 }
 
