@@ -55,6 +55,32 @@ module.exports = function setupREST(app, db) {
     res.json(result)
   })
 
+  app.get('/api/quiz/:id', async (req, res) => {
+    let resultJson = []
+    let allDocs = []
+
+    let quizId = req.params.id
+
+    let collectionRef = collection(db, 'quiz', quizId, "question")
+    let querySnapshot = await getDocs(collectionRef)
+
+    querySnapshot.forEach((doc) => {
+      allDocs.push(doc)
+    })
+
+    for (let doc of allDocs) {
+
+      let quiz = {
+        'name': doc.id, 'answer': doc.data().answer, 'option1': doc.data().option1,
+        'option2': doc.data().option2, 'option3': doc.data().option3
+      }
+      resultJson.push(quiz)
+    }
+    let result = { quizzes: resultJson }
+    res.json(result)
+
+  })
+
   async function getUserRole(req) {
     let userRole = req.session.user.role
     if (userRole === null) return 'Visitor'

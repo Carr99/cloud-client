@@ -6,7 +6,7 @@ let quizz = 'Soccer quiz'
 async function getQuestions() {
   let result = {}
   try {
-    result = await (await fetch(`http://localhost:3002/quiz/${quizz}`, {
+    result = await (await fetch(`/api/quiz/${quizz}`, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
     })).json()
