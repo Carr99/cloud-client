@@ -1,7 +1,7 @@
 async function router() {
   let route = location.pathname;
   // transform route to be a path to a partial
-  route = route === '/' ? '/login' : route;
+  route = route === '/' ? '/question' : route;
   route = '/partials' + route + '.html';
   // load the content from the partial
   let content = await (await fetch(route)).text();
