@@ -1,0 +1,41 @@
+#questionContainer {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+#answersContainer {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+}
+
+#leftAnswers {
+  flex-wrap: wrap;
+
+}
+
+#rightAnswers {
+  position: absolute;
+  right: 0;
+  flex-wrap: wrap;
+}
+
+
+
+
+
+button {
+  font-size: larger;
+  margin: 5px;
+  background-color: transparent;
+  border-radius: 10px;
+  padding: 5px;
+  border: rgb(138, 158, 176) 2px solid;
+  display: block;
+}
+
+button:hover {
+  background-color: rgb(195, 212, 227);
+  cursor: pointer;
+}
