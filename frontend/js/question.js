@@ -1,13 +1,14 @@
+
+
 let questions = [];
 let answer = '';
 let options = [];
-let quizz = 'Soccer quiz'
+let quizz = ''
 let index = 0
 let points = 0
 
-function initQuestions() {
-  document.querySelector('#question').textContent = "This is a test"
-  console.log("initiating questions")
+function initQuestions(quizzId) {
+  quizz = quizzId
   getQuestions()
   document.querySelector("#topLeftAnswer").addEventListener("click", function () {
     if (options[0] == answer) {
@@ -36,7 +37,6 @@ function initQuestions() {
 }
 
 async function getQuestions() {
-  console.log("getting questions")
   index = 0
   let result = {}
   try {
@@ -50,9 +50,8 @@ async function getQuestions() {
   questions = result['quizzes']
   loadQuestion()
 }
-function loadQuestion() {
+async function loadQuestion() {
   if (index < questions.length) {
-    console.log("loading questions")
     answer = questions[index]['answer']
     options = [questions[index]['option1'], questions[index]['option2'], questions[index]['option3'], questions[index]['answer']]
     options.sort(() => Math.random() - 0.5)
@@ -64,6 +63,12 @@ function loadQuestion() {
     index++
   } else {
     alert(`Your score: ${points}`)
+    let body = { quizz: quizz, score: points }
+    await fetch(`/api/score`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    })
   }
 
 }

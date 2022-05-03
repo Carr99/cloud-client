@@ -1,5 +1,6 @@
-const { collection, getDocs, getDoc, doc } = require('firebase/firestore')
-const cors = require('cors')
+const { collection, getDocs, getDoc, setDoc, doc } = require('firebase/firestore')
+const cors = require('cors');
+const session = require('express-session');
 
 module.exports = function setupREST(app, db) {
 
@@ -56,6 +57,10 @@ module.exports = function setupREST(app, db) {
   })
 
   app.get('/api/quiz/:id', async (req, res) => {
+    if (await getUserRole(req) === 'Visitor') {
+      res.status(401).json({ error: 'Not allowed' })
+      return
+    }
     let resultJson = []
     let allDocs = []
 
@@ -79,6 +84,16 @@ module.exports = function setupREST(app, db) {
     let result = { quizzes: resultJson }
     res.json(result)
 
+  })
+  app.post('/api/score', async (req, res) => {
+    let data = req.body
+    let quizz = data.quizz
+    let user = req.session.user.uid
+    let score = data.score
+
+    await setDoc(doc(db, "quiz", quizz, "scores", user), {
+      score: score,
+    });
   })
 
   async function getUserRole(req) {
