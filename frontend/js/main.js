@@ -17,6 +17,8 @@ async function router() {
     register();
   } else if (route === '/partials/admin.html') {
     admin();
+  } else if (route === '/partials/question.html') {
+    initQuestions();
   }
 }
 
