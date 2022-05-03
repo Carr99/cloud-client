@@ -25,7 +25,7 @@
 
 
 
-button {
+.qButton {
   font-size: larger;
   margin: 5px;
   background-color: transparent;
@@ -35,7 +35,7 @@ button {
   display: block;
 }
 
-button:hover {
+.qButton:hover {
   background-color: rgb(195, 212, 227);
   cursor: pointer;
 }
