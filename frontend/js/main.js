@@ -18,6 +18,18 @@ async function router() {
   } else if (route === '/partials/admin.html') {
     admin();
   } else if (route === '/partials/question.html') {
+
+    /* 
+    Use this format on quizzes saved localy
+    localQuiz = []
+        let quiz = {
+          'name': 'Test Quiz', 'answer': 'This is the answer', 'option1': 'option 1',
+          'option2': 'option 2', 'option3': 'option 3'
+        }
+        localQuiz.push(quiz)
+        window.localStorage.setItem('QuizId',
+          JSON.stringify(localQuiz)
+        ) */
     initQuestions('Soccer quiz');
   }
 }

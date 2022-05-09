@@ -10,7 +10,7 @@ let existingScore = false;
 
 function initQuestions(quizzId) {
   quizz = quizzId
-  getQuestions()
+  getQuestions(quizzId)
   document.querySelector("#topLeftAnswer").addEventListener("click", function () {
     if (options[0] == answer) {
       points++
@@ -37,23 +37,31 @@ function initQuestions(quizzId) {
   })
 }
 
-async function getQuestions() {
+async function getQuestions(quizId) {
   index = 0
   let result = {}
-  try {
-    result = await (await fetch(`/api/quiz/${quizz}`, {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
-    })).json()
-  } catch (error) {
-    console.error(error)
+  if (window.localStorage.getItem(quizId)) {
+    questions = JSON.parse(window.localStorage.getItem(quizId))
+    console.log(questions)
+  } else {
+    try {
+      result = await (await fetch(`/api/quiz/${quizz}`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      })).json()
+    } catch (error) {
+      console.error(error)
+    }
+    questions = result['quizzes']
   }
-  questions = result['quizzes']
+  console.log('loading questions')
   loadQuestion()
 }
 async function loadQuestion() {
   if (index < questions.length) {
     answer = questions[index]['answer']
+    console.log(questions)
+    console.log(questions[index])
     options = [questions[index]['option1'], questions[index]['option2'], questions[index]['option3'], questions[index]['answer']]
     options.sort(() => Math.random() - 0.5)
     document.querySelector('#question').textContent = questions[index]['name']
