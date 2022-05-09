@@ -7,17 +7,30 @@ overflow-x: hidden;
 
 }
 button{
-background-color: aqua;  
-  font-size: 30px;
-  text-align: center;
- height: 50px;
- width: 150px;
+  margin: 5px;
+  background-color: transparent;
+  border-radius: 10px;
+  padding: 5px;
+  border: rgb(138, 158, 176) 2px solid;
 
 }
 
-  
+.article {
+  background-color: aliceblue;
+  border-radius: 10px;
+  padding: 5px;
+  margin-bottom: 8px;
+} 
 .fas fa-user-alt{
 
 font-size: 36px;
+
+}
+
+.quizBox{
+
+  position: relative;
+  max-height: 10em;
+  overflow-y: auto;
 
 }

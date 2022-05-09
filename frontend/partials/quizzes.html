@@ -2,15 +2,28 @@
 <link rel="stylesheet" href="../css/quizzes.css">
 <h1>Quiz Menu </h1>
 <i style='font-size:24px' class='fas'>&#xf406;</i>
-<div class="quizList">Quiz
-        <main>
+<div class="quizList">
+<label for="Quiz">Choose a quiz:</label>
 
-        </main>
-    
-</div>
+ <select name="Category" id="quizSelect">
+          <option value="All">All</option>
+          <option value="Sport">Sport</option>
+               
+</select>
 
+<ul class="quizBox">
+
+
+
+</ul>
+
+
+></div>
 <button class="highscoreButton">Highscore</button>
 <button class="startButton">Start!</button>
+<button id="filterButton">Filter</button>
 
 </article>
 <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+<script src='../js/quizzes.js'></script>
+<script src='../js/question.js'></script>

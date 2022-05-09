@@ -1,3 +1,5 @@
+var selectedQuiz = 'Soccer quiz'
+
 async function router() {
   let route = location.pathname;
   // transform route to be a path to a partial
@@ -18,7 +20,10 @@ async function router() {
   } else if (route === '/partials/admin.html') {
     admin();
   } else if (route === '/partials/question.html') {
-    initQuestions('Soccer quiz');
+    initQuestions(selectedQuiz);
+  } 
+   else if (route === '/partials/quizzes.html') {
+    initQuizzes()
   }
 }
 
