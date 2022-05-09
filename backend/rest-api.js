@@ -85,6 +85,34 @@ module.exports = function setupREST(app, db) {
     res.json(result)
 
   })
+  app.get('/api/highscores/:id', cors(), async (req, res) => {
+    if (await getUserRole(req) === 'Visitor') {
+      res.status(401).json({ error: 'Not allowed' })
+      return
+    }
+    let resultJson = []
+    let allDocs = []
+
+    let quizId = req.params.id
+
+    let collectionRef = collection(db, 'quiz', quizId, "scores")
+    let querySnapshot = await getDocs(collectionRef)
+
+    querySnapshot.forEach((doc) => {
+      allDocs.push(doc)
+    })
+
+    for (let doc of allDocs) {
+
+      let score = {
+        'user': doc.id, 'score': doc.data().score
+      }
+      resultJson.push(score)
+    }
+    let result = { scores: resultJson, loggedUser: req.session.user.uid }
+    res.json(result)
+
+  })
   app.post('/api/score', async (req, res) => {
     let data = req.body
     let quizz = data.quizz

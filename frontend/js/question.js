@@ -6,6 +6,7 @@ let options = [];
 let quizz = ''
 let index = 0
 let points = 0
+let existingScore = false;
 
 function initQuestions(quizzId) {
   quizz = quizzId
@@ -63,12 +64,37 @@ async function loadQuestion() {
     index++
   } else {
     alert(`Your score: ${points}`)
-    let body = { quizz: quizz, score: points }
-    await fetch(`/api/score`, {
-      method: 'POST',
+    let scores;
+    scores = await (await fetch(`/api/highscores/${quizz}`, {
+      method: 'GET',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body)
-    })
+    })).json()
+    console.log(scores)
+    scores['scores'].forEach(async score => {
+      if (score['user'] == scores['loggedUser']) {
+        existingScore = true;
+        if (points > score['score']) {
+          let body = { quizz: quizz, score: points }
+          await fetch(`/api/score`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body)
+          })
+        }
+
+      }
+    });
+    if (!existingScore) {
+      let body = { quizz: quizz, score: points }
+      await fetch(`/api/score`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      })
+    }
+
+
+
   }
 
 }
