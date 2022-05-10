@@ -50,40 +50,29 @@ console.log(document.querySelector("#quizSelect").value) })
 
 document.querySelector(".highscoreButton").addEventListener("click", function () {
 
-//Code for moving to the highscorepage
+  selectedQuiz=document.querySelector(".selected").textContent
+  console.log(selectedQuiz)
+  if(!selectedQuiz==false){
+    history.pushState(null, null, '/highscore')
+    router()
+  }else{
+  alert("Please select a quiz before you try to start!")
+  }
 
 })
 
 document.querySelector(".startButton").addEventListener("click", function () {
-  
-
-
 selectedQuiz=document.querySelector(".selected").textContent
-
-if(!selectedQuiz==null){
+console.log(selectedQuiz)
+if(!selectedQuiz==false){
   history.pushState(null, null, '/question')
   router()
 }else{
 alert("Please select a quiz before you try to start!")
 }
-
-
-
-
-
-  //Get quiz id and pass it to the question page and load it.
-  
-  
+   
   })
 }
-
-
-
-
-
-
-
-
 
 
 function filterFunction(category){

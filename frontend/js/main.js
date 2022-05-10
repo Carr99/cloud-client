@@ -1,4 +1,4 @@
-var selectedQuiz = 'Soccer quiz'
+var selectedQuiz = ''
 
 async function router() {
   let route = location.pathname;
@@ -19,7 +19,7 @@ async function router() {
     register();
   } else if (route === '/partials/admin.html') {
     admin();
-  } else if (route === '/partials/question.html') {
+  } else if (route === '/partials/question.html'){
 
     initQuestions(selectedQuiz);
     /* 
@@ -37,6 +37,8 @@ async function router() {
    else if (route === '/partials/quizzes.html') {
     initQuizzes()
       
+  }else if(route==='/partials/highscore.html'){
+    initScore(selectedQuiz)
   }
 }
 
