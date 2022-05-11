@@ -6,21 +6,8 @@ overflow-x: hidden;
 
 
 }
-button{
-  margin: 5px;
-  background-color: transparent;
-  border-radius: 10px;
-  padding: 5px;
-  border: rgb(138, 158, 176) 2px solid;
 
-}
 
-.article {
-  background-color: aliceblue;
-  border-radius: 10px;
-  padding: 5px;
-  margin-bottom: 8px;
-} 
 .fas fa-user-alt{
 
 font-size: 36px;
