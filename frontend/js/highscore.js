@@ -2,30 +2,26 @@ let highscores
 let users
 async function initScore(quizId) {
 
-
-await getScore(quizId)
-await getUsers()
-console.log(highscores)
-tempHtml=``
-for (const highscore of highscores) {
-
+  await getScore(quizId)
+  await getUsers()
+  console.log(highscores)
+  tempHtml = ``
+  for (const highscore of highscores) {
     
-
     for (const user of users) {
-    if(highscore['user']==user['id']){
-      console.log(user)
-    tempHtml+=`<h2  id=${user["id"]}>${user["data"]["username"]}: ${highscore["score"]}</h2>`
-   } 
-}
+      if (highscore['user'] == user['id']) {
+        console.log(user)
+        tempHtml += `<h2  id=${user["id"]}>${user["data"]["username"]}: ${highscore["score"]}</h2>`
+      }
+    }
+
+  }
+  document.querySelector("#scoreBox").innerHTML = tempHtml
 
 }
 
-document.querySelector("#scoreBox").innerHTML=tempHtml
-
-}
-
-async function getScore (quizId){
-    let result = {}
+async function getScore(quizId) {
+  let result = {}
   try {
     result = await (await fetch(`/api/highscores/${quizId}`, {
       method: 'GET',
@@ -34,12 +30,12 @@ async function getScore (quizId){
   } catch (error) {
     console.error(error);
   }
-  highscores=result['scores']
+  highscores = result['scores']
   console.log(result)
 }
 
-async function getUsers(){
-    let result = {}
+async function getUsers() {
+  let result = {}
   try {
     result = await (await fetch(`/api/allUsers`, {
       method: 'GET',
@@ -48,6 +44,6 @@ async function getUsers(){
   } catch (error) {
     console.error(error);
   }
-  users=result['users']
+  users = result['users']
   console.log(result)
 }

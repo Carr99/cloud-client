@@ -86,7 +86,6 @@ module.exports = function setupREST(app, db) {
 
   })
   app.get('/api/highscores/:id', cors(), async (req, res) => {
-   
     let resultJson = []
     let allDocs = []
 
@@ -99,16 +98,18 @@ module.exports = function setupREST(app, db) {
       allDocs.push(doc)
     })
 
-    for (let doc of allDocs) {
-
+    for (let aDoc of allDocs) {
+      let docRef = doc(db, "user", aDoc.id);
+      let docSnap = await getDoc(docRef);
+      let user = await docSnap.data().username
       let score = {
-        'user': doc.id, 'score': doc.data().score
+        'user': user, 'score': aDoc.data().score
       }
       resultJson.push(score)
     }
-    let result = { scores: resultJson, loggedUser: req.session.user.uid }
-    res.json(result)
 
+    let result = { scores: resultJson }
+    res.json(result)
   })
   app.post('/api/score', async (req, res) => {
     let data = req.body
