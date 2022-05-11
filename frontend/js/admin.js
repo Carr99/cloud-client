@@ -42,3 +42,15 @@ async function renderUserInfo() {
   html += '</tbody></table></article>'
   document.querySelector('.adminTable').innerHTML = html
 }
+
+async function logOutUser() {
+  let result;
+  try {
+    result = await (await fetch('/api/login', {
+      method: 'DELETE'
+    })).json()
+  }
+  catch (ignore) { }
+
+  location.href = '/'
+}
