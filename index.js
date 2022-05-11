@@ -13,7 +13,7 @@ const firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig);
 const db = getFirestore(firebaseApp);
 
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3000;
 
 // Import the express module
 const express = require('express');
