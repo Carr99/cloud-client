@@ -39,7 +39,7 @@ module.exports = function setupREST(app, db) {
   })
 
   app.get('/api/allUsers', async (req, res) => {
-    if (await getUserRole(req) === 'Visitor') {
+    if (await getUserRole(req) !== 'Admin') {
       res.status(401).json({ error: 'Not allowed' })
       return
     }
@@ -49,8 +49,7 @@ module.exports = function setupREST(app, db) {
 
     let allUsers = []
     querySnapshot.forEach((doc) => {
-      let tempVar = { data:doc.data() , id:doc.id }
-      allUsers.push(tempVar)
+      allUsers.push(doc.data())
     })
 
     let result = { users: allUsers }
@@ -87,10 +86,7 @@ module.exports = function setupREST(app, db) {
 
   })
   app.get('/api/highscores/:id', cors(), async (req, res) => {
-    if (await getUserRole(req) === 'Visitor') {
-      res.status(401).json({ error: 'Not allowed' })
-      return
-    }
+   
     let resultJson = []
     let allDocs = []
 

@@ -1,30 +1,23 @@
-<article>
-<link rel="stylesheet" href="../css/quizzes.css">
-<h1>Quiz Menu </h1>
-<i style='font-size:24px' class='fas'>&#xf406;</i>
-<div class="quizList">
-<h3>Use arrows to navigate the list</h3>
-<label for="Quiz">Choose a quiz:</label>
+<section>
+    <h1>Quiz Menu </h1>
+    <article class="article">
+        <i style='font-size:24px' class='fas'>&#xf406;</i>
+        <div class="quizList">
+            <label for="Quiz">Choose a quiz:</label>
+            <div id="quizSelect">
+                <select name="Category">
+                    <option value="All">All</option>
+                    <option value="Sport">Sport</option>
+                </select>
+            </div>
+            <div class="quizBox">
+
+            </div>
 
 
-
- <select name="Category" id="quizSelect">
-          <option value="All">All</option>
-          <option value="Sport">Sport</option>
-               
-</select>
-
-<div class="quizBox">
-
-
-
-</div>
-
-
-</div>
-<button class="highscoreButton">Highscore</button>
-<button class="startButton">Start!</button>
-<button id="filterButton">Filter</button>
-
-</article>
-<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+        </div>
+        <button id="highscoreButton" class="submitBtn">Highscore</button>
+        <button id="downloadButton" class="submitBtn">Download</button>
+        <button id="startButton" class="submitBtn">Start!</button>
+    </article>
+</section>
