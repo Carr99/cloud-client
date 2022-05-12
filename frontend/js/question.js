@@ -6,7 +6,8 @@ let options = [];
 let quizz = ''
 let index = 0
 let points = 0
-let existingScore = false;
+let interval
+let existingScore = false
 
 function initQuestions(quizzId) {
   quizz = quizzId
@@ -15,25 +16,25 @@ function initQuestions(quizzId) {
     if (options[0] == answer) {
       points++
     }
-    loadQuestion()
+    loadQuestion(quizzId)
   })
   document.querySelector("#topRightAnswer").addEventListener("click", function () {
     if (options[1] == answer) {
       points++
     }
-    loadQuestion()
+    loadQuestion(quizzId)
   })
   document.querySelector("#bottomLeftAnswer").addEventListener("click", function () {
     if (options[2] == answer) {
       points++
     }
-    loadQuestion()
+    loadQuestion(quizzId)
   })
   document.querySelector("#bottomRightAnswer").addEventListener("click", function (event) {
     if (options[3] == answer) {
       points++
     }
-    loadQuestion()
+    loadQuestion(quizzId)
   })
 }
 
@@ -42,6 +43,7 @@ async function getQuestions(quizId) {
   let result = {}
   if (window.localStorage.getItem(quizId)) {
     questions = JSON.parse(window.localStorage.getItem(quizId))
+
     console.log(questions)
   } else {
     try {
@@ -57,7 +59,7 @@ async function getQuestions(quizId) {
   console.log('loading questions')
   loadQuestion()
 }
-async function loadQuestion() {
+async function loadQuestion(quizId) {
   if (index < questions.length) {
     answer = questions[index]['answer']
     console.log(questions)
@@ -72,17 +74,28 @@ async function loadQuestion() {
     index++
   } else {
     alert(`Your score: ${points}`)
+    saveScore(quizId, points)
+
+
+
+
+  }
+
+}
+async function saveScore(quizzId, finalScore) {
+  let connected = await checkConnection()
+  if (connected) {
+    console.log("got connection while saving")
     let scores;
-    scores = await (await fetch(`/api/highscores/${quizz}`, {
+    scores = await (await fetch(`/api/highscores/${quizzId}`, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
     })).json()
-    console.log(scores)
     scores['scores'].forEach(async score => {
       if (score['user'] == scores['loggedUser']) {
         existingScore = true;
-        if (points > score['score']) {
-          let body = { quizz: quizz, score: points }
+        if (finalScore > score['score']) {
+          let body = { quizz: quizz, score: finalScore }
           await fetch(`/api/score`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -93,16 +106,43 @@ async function loadQuestion() {
       }
     });
     if (!existingScore) {
-      let body = { quizz: quizz, score: points }
+      let body = { quizz: quizz, score: finalScore }
       await fetch(`/api/score`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body)
       })
     }
+  } else {
+    console.log("no connection while saving")
+    alert("you are currently offline, but dont worry! your score will be saved as soon as you become online!")
+    interval = setInterval(reConnect, 5000)
+    let score = { 'quiz': quizz, 'score': finalScore }
+    window.localStorage.setItem('localScore', score)
+  }
+}
+async function checkConnection() {
+  try {
+    const headers = new Headers();
+    headers.append('Cache-Control', 'no-cache');
+    let response = await fetch('https://www.google.com', {
+      mode: 'no-cors'
+    })
 
-
-
+    if (response.status != 200) {
+      return true
+    }
+  } catch (err) {
+    return false
   }
 
+}
+async function reConnect() {
+  let connected = await checkConnection()
+  if (connected && window.localStorage.getItem('localScore')) {
+    this.alert("reconnected, saving your score!")
+    saveScore(this.window.localStorage.getItem('localScore')['quiz'], window.localStorage.getItem('localScore')['points'])
+    this.window.localStorage.removeItem('localScore')
+    clearInterval(interval)
+  }
 }
