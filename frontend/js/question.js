@@ -75,15 +75,9 @@ async function loadQuestion(quizId) {
   } else {
     alert(`Your score: ${points}`)
     saveScore(quizId, points)
-    history.pushState(null, null, '/quizzes')
-    router()
-
-
-
-
   }
-
 }
+
 async function saveScore(quizzId, finalScore) {
   let connected = await checkConnection()
   if (connected) {
@@ -115,6 +109,8 @@ async function saveScore(quizzId, finalScore) {
         body: JSON.stringify(body)
       })
     }
+    history.pushState(null, null, '/quizzes')
+    router()
   } else {
     console.log("no connection while saving")
     alert("you are currently offline, but dont worry! your score will be saved as soon as you become online!")
