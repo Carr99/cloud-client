@@ -75,6 +75,8 @@ async function loadQuestion(quizId) {
   } else {
     alert(`Your score: ${points}`)
     saveScore(quizId, points)
+    history.pushState(null, null, '/quizzes')
+    router()
 
 
 
