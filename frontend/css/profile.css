@@ -1,18 +1,67 @@
-h1{
+#profileContainer {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
 
-justify-content: center;
+#infoFieldsContainer {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+}
+
+#leftFields {
+  flex-wrap: wrap;
 
 }
 
-.leftContainer{
-
-text-align: left;
-justify-content: left;
-
+#rightFields {
+  position: absolute;
+  right: 0;
+  flex-wrap: wrap;
 }
-.rightContainer{
-justify-content: right;
-text-align: right;
 
 
+
+
+
+.clickableButton {
+  margin: 5px;
+  background-color: rgb(195, 212, 227);
+  border-radius: 10px;
+  padding: 5px;
+  border: rgb(138, 158, 176) 2px solid;
+}
+
+#backButton {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.pButton {
+  font-size: larger;
+  margin: 5px;
+  background-color: transparent;
+  border-radius: 10px;
+  padding: 5px;
+  border: rgb(138, 158, 176) 2px solid;
+  display: block;
+}
+
+.clickableButton:hover {
+  background-color: transparent;
+  cursor: pointer;
+}
+
+#passwordField {
+  border-radius: 10px;
+  margin: 5px;
+  padding: 5px;
+  width: 90%;
+  border: rgb(138, 158, 176) 1px solid;
+}
+
+label {
+  margin: 5px;
 }

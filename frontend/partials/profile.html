@@ -1,16 +1,19 @@
-<article>
-<link rel="stylesheet" href="../css/profile.css">
-<body>
-    <h1>Profile</h1>
-
-<div class="leftContainer">
-    <div class="userName">Temp1</div>
-    <div class="password">Temp2</div>
-</div>
-<div class="rightContainer">
-    <div class="rightSide">Temp3</div>
-    <div class="rightSide">Temp4</div>
-</div>
-    
-</body>
-</article>
+<section class="profileSection">
+    <div id="profileContainer">
+        <h2 id="profileHeader">My Profile</h2>
+    </div>
+    <div id="infoFieldsContainer">
+        <div id="leftFields">
+            <label>Email</label>
+            <button class="pButton" id="topLeftAnswer">email</button>
+            <label>username</label>
+            <button class="pButton" id="bottomLeftAnswer">username</button>
+        </div>
+        <div id="rightFields">
+            <label>New Password:</label>
+            <input type="password" id="passwordField"></input>
+            <button class="clickableButton" id="changePasswordButton">change password</button>
+        </div>
+        <button class="clickableButton" id="backButton" onclick="location.href='/'">Back</button>
+    </div>
+</section>
