@@ -12,6 +12,7 @@ overflow-x: hidden;
 
 font-size: 36px;
 
+
 }
 
 .quizBox{
@@ -25,6 +26,13 @@ font-size: 36px;
   background: lightgreen;
 }
 
+i:hover {
+
+cursor: pointer;
+background-color:  rgb(195, 212, 227);
+border-radius: 10px;
+
+}
 
 
 
