@@ -37,8 +37,11 @@ async function router() {
    else if (route === '/partials/quizzes.html') {
     initQuizzes()
       
-  }else if(route==='/partials/highscore.html'){
+  }else if(route ==='/partials/highscore.html'){
     initScore(selectedQuiz)
+  }
+  else if(route ==='/partials/profile.html'){
+  //initial function
   }
 }
 
