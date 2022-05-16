@@ -87,6 +87,7 @@ async function initQuizzes() {
   document.querySelector("#downloadButton").addEventListener("click", function () {
     selectedQuiz = document.querySelector(".selected").textContent
     storeQuiz(selectedQuiz)
+    console.log("You downloaded: "+selectedQuiz)
 
   })
 
@@ -119,18 +120,16 @@ function getCurrentQuiz() {
 }
 
 async function storeQuiz(quizId) {
-  index = 0
   let result = {}
     try {
-      result = await (await fetch(`/api/quiz/${quizzes}`, {
+      result = await (await fetch(`/api/quiz/${quizId}`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
       })).json()
-      console.log("downloading quiz..." + result)
-    } catch (error) {
+      } catch (error) {
       console.error(error)
     }
-  
+    console.log(result)
     window.localStorage.setItem(quizId,
       JSON.stringify(result['quizzes'])
     )
