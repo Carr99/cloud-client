@@ -49,13 +49,15 @@ async function initQuizzes() {
     let table = event.target.value
     filterFunction(table)
   }
-  document.querySelector("#downloadButton").addEventListener("click", function () {
-    filterFunction(document.querySelector("#quizSelect").value)
-    console.log("You downloaded...")
-    console.log(document.querySelector("#quizSelect").value)
+  
+
+  document.querySelector(".fas").addEventListener("click",function(){
+
+    history.pushState(null, null, '/profile')
+    router()
+    
+  
   })
-
-
 
 
   document.querySelector("#highscoreButton").addEventListener("click", function () {
@@ -82,11 +84,14 @@ async function initQuizzes() {
     }
 
   })
+  document.querySelector("#downloadButton").addEventListener("click", function () {
+    selectedQuiz = document.querySelector(".selected").textContent
+    storeQuiz(selectedQuiz)
+
+  })
+
 }
-
-
 function filterFunction(category) {
-  console.log("In filter function...")
   let temporaryHtml = ''
 
   for (const quiz of quizzes) {
@@ -113,4 +118,20 @@ function getCurrentQuiz() {
 
 }
 
-
+async function storeQuiz(quizId) {
+  index = 0
+  let result = {}
+    try {
+      result = await (await fetch(`/api/quiz/${quizId}`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      })).json()
+      console.log("downloading quiz..." + result)
+    } catch (error) {
+      console.error(error)
+    }
+  
+    window.localStorage.setItem(quizId,
+      JSON.stringify(result['quizzes'])
+    )
+}
