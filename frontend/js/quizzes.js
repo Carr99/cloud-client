@@ -122,7 +122,7 @@ async function storeQuiz(quizId) {
   index = 0
   let result = {}
     try {
-      result = await (await fetch(`/api/quiz/${quizId}`, {
+      result = await (await fetch(`/api/quiz/${quizzes}`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
       })).json()
