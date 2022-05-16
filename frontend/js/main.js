@@ -19,7 +19,7 @@ async function router() {
     register();
   } else if (route === '/partials/admin.html') {
     admin();
-  } else if (route === '/partials/question.html'){
+  } else if (route === '/partials/question.html') {
 
     initQuestions(selectedQuiz);
     /* 
@@ -33,15 +33,15 @@ async function router() {
         window.localStorage.setItem('QuizId',
           JSON.stringify(localQuiz)
         ) */
-  } 
-   else if (route === '/partials/quizzes.html') {
+  }
+  else if (route === '/partials/quizzes.html') {
     initQuizzes()
-      
-  }else if(route ==='/partials/highscore.html'){
+
+  } else if (route === '/partials/highscore.html') {
     initScore(selectedQuiz)
   }
-  else if(route ==='/partials/profile.html'){
-  //initial function
+  else if (route === '/partials/profile.html') {
+    initProfile()
   }
 }
 

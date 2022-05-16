@@ -1,4 +1,5 @@
 const { collection, getDocs, getDoc, setDoc, doc } = require('firebase/firestore')
+const { getAuth, updatePassword } = require('firebase/auth')
 const cors = require('cors');
 const session = require('express-session');
 
@@ -102,15 +103,25 @@ module.exports = function setupREST(app, db) {
       let docRef = doc(db, "user", aDoc.id);
       let docSnap = await getDoc(docRef);
       let user = await docSnap.data().username
+      let userId = docSnap.id
       let score = {
-        'user': user, 'score': aDoc.data().score
+        'user': user, 'score': aDoc.data().score, 'userId': userId
       }
       resultJson.push(score)
     }
 
-    let result = { scores: resultJson }
+    let result = { scores: resultJson, loggedUser: req.session.user.uid }
     res.json(result)
   })
+
+  app.get('/api/profile', async (req, res) => {
+    let docRef = doc(db, "user", req.session.user.uid);
+    let docSnap = await getDoc(docRef);
+    let user = await docSnap.data().username;
+    let profile = { 'user': user, 'email': req.session.user.email };
+    res.json(profile)
+  })
+
   app.post('/api/score', async (req, res) => {
     let data = req.body
     let quizz = data.quizz
@@ -119,8 +130,28 @@ module.exports = function setupREST(app, db) {
 
     await setDoc(doc(db, "quiz", quizz, "scores", user), {
       score: score,
+    }).then(() => {
+      res.json("ScoreSaved")
+    }).catch((error) => {
+      res.json(error)
+    });
+
+  })
+
+  app.post('/api/updatePassword', (req, res) => {
+    let data = req.body
+    let newPassword = data.password
+    const auth = getAuth();
+
+    const user = auth.currentUser;
+
+    updatePassword(user, newPassword).then(() => {
+      res.json("Password updated")
+    }).catch((error) => {
+      res.json(error)
     });
   })
+
 
   async function getUserRole(req) {
     let userRole = req.session.user.role

@@ -16,6 +16,7 @@
 }
 
 #rightFields {
+  text-align: right;
   position: absolute;
   right: 0;
   flex-wrap: wrap;
@@ -58,7 +59,7 @@
   border-radius: 10px;
   margin: 5px;
   padding: 5px;
-  width: 90%;
+  width: 50%;
   border: rgb(138, 158, 176) 1px solid;
 }
 

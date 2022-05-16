@@ -42,6 +42,7 @@ async function getQuestions(quizId) {
   index = 0
   let result = {}
   if (window.localStorage.getItem(quizId)) {
+    console.log("local storage found")
     questions = JSON.parse(window.localStorage.getItem(quizId))
 
     console.log(questions)
@@ -75,6 +76,7 @@ async function loadQuestion(quizId) {
   } else {
     alert(`Your score: ${points}`)
     saveScore(quizId, points)
+    points = 0;
   }
 }
 
@@ -88,9 +90,11 @@ async function saveScore(quizzId, finalScore) {
       headers: { 'Content-Type': 'application/json' },
     })).json()
     scores['scores'].forEach(async score => {
-      if (score['user'] == scores['loggedUser']) {
+      if (score['userId'] == scores['loggedUser']) {
+        console.log("previous score found")
         existingScore = true;
         if (finalScore > score['score']) {
+          console.log("highscore beaten")
           let body = { quizz: quizz, score: finalScore }
           await fetch(`/api/score`, {
             method: 'POST',
@@ -102,6 +106,7 @@ async function saveScore(quizzId, finalScore) {
       }
     });
     if (!existingScore) {
+      console.log("no existing score found")
       let body = { quizz: quizz, score: finalScore }
       await fetch(`/api/score`, {
         method: 'POST',
@@ -109,6 +114,7 @@ async function saveScore(quizzId, finalScore) {
         body: JSON.stringify(body)
       })
     }
+    console.log("rerouting")
     history.pushState(null, null, '/quizzes')
     router()
   } else {
@@ -118,6 +124,7 @@ async function saveScore(quizzId, finalScore) {
     let score = { 'quiz': quizz, 'score': finalScore }
     window.localStorage.setItem('localScore', score)
   }
+  existingScore = false;
 }
 async function checkConnection() {
   try {
