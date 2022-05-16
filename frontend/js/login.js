@@ -66,6 +66,6 @@ async function loginClicked() {
 }
 
 function changeRoute(role) {
-  role == 'Admin' ? history.pushState(null, null, '/admin') : history.pushState(null, null, '/quizzes')
+  role == 'Admin' ? history.pushState(null, null, '/admin') : history.pushState(null, null, '/profile')
   router()
 }
