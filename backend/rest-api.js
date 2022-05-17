@@ -1,7 +1,6 @@
 const { collection, getDocs, getDoc, setDoc, doc } = require('firebase/firestore')
 const { getAuth, updatePassword } = require('firebase/auth')
 const cors = require('cors');
-const session = require('express-session');
 
 module.exports = function setupREST(app, db) {
 
