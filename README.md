@@ -23,3 +23,22 @@ There is automated testing with GitHub actions and the tool Cypress. The action 
 ## Heroku/Docker
 
 ## Offline
+
+## API Routes
+Method | Path | Body | Purpose |
+--- | --- | --- | --- |
+GET | /api/ | - | Returns a info page |
+GET | /api/login | - | Check if current user is logged in |
+GET | /api/allQuizzes | - | Returns all quizzes and how many questions for them |
+GET | /api/allUsers | - | Returns all users username and userroles |
+GET | /api/quiz/(id) | Name of the quiz | Returns all questions with answers and options of a quiz |
+GET | /api/highscores/(id) | Name of the quiz | Returns all users scores on the specific quiz with their username |
+GET | /api/profile | - | Returns username and email of logged in user |
+--- | 
+POST | /api/login | User credentials | Used to login |
+POST | /api/register | User credentials | Used to create a new user |
+POST | /api/score | Quiz name and the score | Returns if it succesfully saved the score or not |
+POST | /api/updatePassword | password | Returns if it succesfully changed password or not |
+--- | 
+DELETE | /api/login | - | Logs out the current user |
+
