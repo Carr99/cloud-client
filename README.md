@@ -23,3 +23,4 @@ There is automated testing with GitHub actions and the tool Cypress. The action 
 ## Heroku/Docker
 
 ## Offline
+For the offline aspect of the application, features for downloading quizzes to local storage and in case of local storage containing an element matching the quiz id, the quiz will be loaded from localstorage rather than from the database. This feature allows the user to run quizzes even when the connection to the database is lost. Furthermore a delayed score saving feature has been implemented that saves a score to localstorage and continually checks for a internet connection until the score can be saved.

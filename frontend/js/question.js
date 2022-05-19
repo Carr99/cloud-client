@@ -42,10 +42,8 @@ async function getQuestions(quizId) {
   index = 0
   let result = {}
   if (window.localStorage.getItem(quizId)) {
-    console.log("local storage found")
     questions = JSON.parse(window.localStorage.getItem(quizId))
 
-    console.log(questions)
   } else {
     try {
       result = await (await fetch(`/api/quiz/${quizz}`, {
@@ -53,18 +51,14 @@ async function getQuestions(quizId) {
         headers: { 'Content-Type': 'application/json' },
       })).json()
     } catch (error) {
-      console.error(error)
     }
     questions = result['quizzes']
   }
-  console.log('loading questions')
   loadQuestion()
 }
 async function loadQuestion(quizId) {
   if (index < questions.length) {
     answer = questions[index]['answer']
-    console.log(questions)
-    console.log(questions[index])
     options = [questions[index]['option1'], questions[index]['option2'], questions[index]['option3'], questions[index]['answer']]
     options.sort(() => Math.random() - 0.5)
     document.querySelector('#question').textContent = questions[index]['name']
@@ -83,7 +77,6 @@ async function loadQuestion(quizId) {
 async function saveScore(quizzId, finalScore) {
   let connected = await checkConnection()
   if (connected) {
-    console.log("got connection while saving")
     let scores;
     scores = await (await fetch(`/api/highscores/${quizzId}`, {
       method: 'GET',
@@ -91,10 +84,8 @@ async function saveScore(quizzId, finalScore) {
     })).json()
     scores['scores'].forEach(async score => {
       if (score['userId'] == scores['loggedUser']) {
-        console.log("previous score found")
         existingScore = true;
         if (finalScore > score['score']) {
-          console.log("highscore beaten")
           let body = { quizz: quizz, score: finalScore }
           await fetch(`/api/score`, {
             method: 'POST',
@@ -106,7 +97,6 @@ async function saveScore(quizzId, finalScore) {
       }
     });
     if (!existingScore) {
-      console.log("no existing score found")
       let body = { quizz: quizz, score: finalScore }
       await fetch(`/api/score`, {
         method: 'POST',
@@ -114,11 +104,9 @@ async function saveScore(quizzId, finalScore) {
         body: JSON.stringify(body)
       })
     }
-    console.log("rerouting")
     history.pushState(null, null, '/quizzes')
     router()
   } else {
-    console.log("no connection while saving")
     alert("you are currently offline, but dont worry! your score will be saved as soon as you become online!")
     interval = setInterval(reConnect, 5000)
     let score = { 'quiz': quizz, 'score': finalScore }

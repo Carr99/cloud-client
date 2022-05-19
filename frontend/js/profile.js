@@ -30,7 +30,6 @@ async function initProfile() {
 }
 function getNewPassword() {
   let passwordField = document.querySelector("#passwordField")
-  console.log(passwordField.value)
   if (passwordField.value != false) {
     return passwordField.value;
   } else {
