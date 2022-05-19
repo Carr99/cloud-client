@@ -1,7 +1,6 @@
 const { collection, getDocs, getDoc, setDoc, doc } = require('firebase/firestore')
 const { getAuth, updatePassword } = require('firebase/auth')
 const cors = require('cors');
-const session = require('express-session');
 
 module.exports = function setupREST(app, db) {
 
@@ -103,14 +102,13 @@ module.exports = function setupREST(app, db) {
       let docRef = doc(db, "user", aDoc.id);
       let docSnap = await getDoc(docRef);
       let user = await docSnap.data().username
-      let userId = docSnap.id
       let score = {
-        'user': user, 'score': aDoc.data().score, 'userId': userId
+        'user': user, 'score': aDoc.data().score
       }
       resultJson.push(score)
     }
 
-    let result = { scores: resultJson, loggedUser: req.session.user.uid }
+    let result = { scores: resultJson }
     res.json(result)
   })
 

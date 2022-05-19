@@ -24,3 +24,22 @@ There is automated testing with GitHub actions and the tool Cypress. The action 
 
 ## Offline
 For the offline aspect of the application, features for downloading quizzes to local storage and in case of local storage containing an element matching the quiz id, the quiz will be loaded from localstorage rather than from the database. This feature allows the user to run quizzes even when the connection to the database is lost. Furthermore a delayed score saving feature has been implemented that saves a score to localstorage and continually checks for a internet connection until the score can be saved.
+
+## API Routes
+Method | Path | Body | Purpose |
+--- | --- | --- | --- |
+GET | /api/ | - | Returns a info page |
+GET | /api/login | - | Check if current user is logged in |
+GET | /api/allQuizzes | - | Returns all quizzes and how many questions for them |
+GET | /api/allUsers | - | Returns all users username and userroles |
+GET | /api/quiz/(id) | Name of the quiz | Returns all questions with answers and options of a quiz |
+GET | /api/highscores/(id) | Name of the quiz | Returns all users scores on the specific quiz with their username |
+GET | /api/profile | - | Returns username and email of logged in user |
+--- | 
+POST | /api/login | User credentials | Used to login |
+POST | /api/register | User credentials | Used to create a new user |
+POST | /api/score | Quiz name and the score | Returns if it succesfully saved the score or not |
+POST | /api/updatePassword | password | Returns if it succesfully changed password or not |
+--- | 
+DELETE | /api/login | - | Logs out the current user |
+
