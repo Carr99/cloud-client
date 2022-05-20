@@ -33,7 +33,11 @@ async function initQuizzes() {
       currentTag.classList.remove('selected');
 
     }
-    aTag.className = 'selected';
+
+    if( aTag.className==false){
+      alert("please select a quiz first")
+    }else{ aTag.className = 'selected';}
+   
 
 
   })
@@ -61,7 +65,10 @@ async function initQuizzes() {
 
 
   document.querySelector("#highscoreButton").addEventListener("click", function () {
+    if(selectedQuiz==false){
+      alert("You have to select a quiz before you can see its highscore!")
 
+    }
     selectedQuiz = document.querySelector(".selected").textContent
     console.log(selectedQuiz)
     if (!selectedQuiz == false) {
@@ -74,20 +81,29 @@ async function initQuizzes() {
   })
 
   document.querySelector("#startButton").addEventListener("click", function () {
-    selectedQuiz = document.querySelector(".selected").textContent
-    console.log(selectedQuiz)
-    if (!selectedQuiz == false) {
-      history.pushState(null, null, '/question')
-      router()
-    } else {
-      alert("Please select a quiz before you try to start!")
-    }
+      if(selectedQuiz==false){
+      alert("Please select a quiz before attempting to start it!")
+    }else{
+            selectedQuiz = document.querySelector(".selected").textContent     
+            console.log(selectedQuiz)
+          if (!selectedQuiz == false) {
+           history.pushState(null, null, '/question')
+          router()
+          }}
+    
 
   })
   document.querySelector("#downloadButton").addEventListener("click", function () {
-    selectedQuiz = document.querySelector(".selected").textContent
+    if(selectedQuiz==false){
+              alert("Please select a quiz before attempting to download it")
+    } else{
+      
+      selectedQuiz = document.querySelector(".selected").textContent
+   
     storeQuiz(selectedQuiz)
-    console.log("You downloaded: "+selectedQuiz)
+    console.log("You downloaded: "+selectedQuiz)}
+    
+    
 
   })
 
