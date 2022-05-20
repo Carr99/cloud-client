@@ -34,9 +34,8 @@ async function initQuizzes() {
 
     }
 
-    if( aTag.className==false){
-      alert("please select a quiz first")
-    }else{ aTag.className = 'selected';}
+  
+      aTag.className = 'selected';
    
 
 
@@ -68,15 +67,13 @@ async function initQuizzes() {
     if(selectedQuiz==false){
       alert("You have to select a quiz before you can see its highscore!")
 
-    }
-    selectedQuiz = document.querySelector(".selected").textContent
+    }else{ selectedQuiz = document.querySelector(".selected").textContent
     console.log(selectedQuiz)
     if (!selectedQuiz == false) {
       history.pushState(null, null, '/highscore')
       router()
-    } else {
-      alert("Please select a quiz before you try to start!")
-    }
+    }}
+   
 
   })
 

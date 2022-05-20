@@ -1,7 +1,7 @@
 # cloud-client
 
 ## Overview
-summery of the application
+Summery of the application
 
 ## Login/Security
 ### Firebase auth
@@ -15,7 +15,7 @@ The application also uses express-session to store a user to prevent the need to
 When an admin logs in they go directly to the admin page where they can choose between seeing all the quizzes and all the users. The result is presented in a table and for the quizzes the quiz name togheter with the number of questions. The table of the users show all the users with there username and there userrole.
 
 ### Highscore 
-
+When a user is logged in they have the possilbity to view the highscore of the different quizzes that are available.
 ## Automated testing
 ### Cypress
 There is automated testing with GitHub actions and the tool Cypress. The action is done by first building the node.js applicaion by installing all npm packages and then running the Cypress tests on localhost.
