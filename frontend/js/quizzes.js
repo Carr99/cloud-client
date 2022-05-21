@@ -12,11 +12,9 @@ async function getQuizzes() {
     console.error(error);
   }
   quizzes = result['quizzes']
-  console.log(result)
 }
 async function initQuizzes() {
 
-  console.log("Intializing...")
   await getQuizzes()
   handleSelectBox()
   document.querySelector('.quizBox').addEventListener('click', function (e) {
@@ -107,16 +105,10 @@ function filterFunction(category) {
     }
 
   }
-  console.log(temporaryHtml)
   document.querySelector(".quizBox").innerHTML = temporaryHtml
 
 }
 
-function getCurrentQuiz() {
-
-  console.log("The current quiz is: ", currentQuiz)
-
-}
 
 async function storeQuiz(quizId) {
   let result = {}
@@ -128,7 +120,6 @@ async function storeQuiz(quizId) {
   } catch (error) {
     console.error(error)
   }
-  console.log(result)
   window.localStorage.setItem(quizId,
     JSON.stringify(result['quizzes'])
   )
