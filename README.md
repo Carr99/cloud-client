@@ -1,7 +1,9 @@
 # cloud-client
 
 ## Overview
-Summery of the application
+This application is an Quiz web app that an user can regsiter and then choose between different quizzes to play.
+</br>
+Link: <a href="https://mysterious-taiga-32214.herokuapp.com/">QuizApp</a>
 
 ## Login/Security
 ### Firebase auth
@@ -16,11 +18,14 @@ When an admin logs in they go directly to the admin page where they can choose b
 
 ### Highscore 
 When a user is logged in they have the possilbity to view the highscore of the different quizzes that are available.
+</br>
+The highscore for the different quizzes is also made avaiable for other sites to use, this is done by the imported library "cors" to be able to fetch the data from another origin.
 ## Automated testing
 ### Cypress
 There is automated testing with GitHub actions and the tool Cypress. The action is done by first building the node.js applicaion by installing all npm packages and then running the Cypress tests on localhost.
 
 ## Heroku/Docker
+The application is deployed to heroku by using docker. The docker is ignoring unnecessary folders such as cypress and node-modules.
 
 ## Offline
 For the offline aspect of the application, features for downloading quizzes to local storage and in case of local storage containing an element matching the quiz id, the quiz will be loaded from localstorage rather than from the database. This feature allows the user to run quizzes even when the connection to the database is lost. Furthermore a delayed score saving feature has been implemented that saves a score to localstorage and continually checks for a internet connection until the score can be saved.
