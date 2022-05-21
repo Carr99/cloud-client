@@ -1,8 +1,5 @@
-
 let quiz = ''
 let quizzes = []
-
-
 
 async function getQuizzes() {
   let result = {}
@@ -24,27 +21,25 @@ async function initQuizzes() {
   handleSelectBox()
   document.querySelector('.quizBox').addEventListener('click', function (e) {
 
-
     e.preventDefault()
     let aTag = e.target.closest('a');
+
+    if (aTag == null) return
+
     let aTags = document.querySelectorAll('a');
 
     for (let currentTag of aTags) {
       currentTag.classList.remove('selected');
-
     }
 
-  
-      aTag.className = 'selected';
-   
-
+    aTag.className = 'selected';
 
   })
 
 
   function handleSelectBox() {
     let selectBox = document.querySelector('#quizSelect' + ' select')
-  
+
     selectBox.addEventListener('change', eventHandler)
     eventHandler({ target: selectBox })
   }
@@ -52,56 +47,47 @@ async function initQuizzes() {
     let table = event.target.value
     filterFunction(table)
   }
-  
 
-  document.querySelector(".fas").addEventListener("click",function(){
+
+  document.querySelector("#fas").addEventListener("click", function () {
 
     history.pushState(null, null, '/profile')
     router()
-    
-  
+
+
   })
 
 
   document.querySelector("#highscoreButton").addEventListener("click", function () {
-    if(selectedQuiz==false){
+    let temp = document.querySelector(".selected")
+    if (temp == null) {
       alert("You have to select a quiz before you can see its highscore!")
-
-    }else{ selectedQuiz = document.querySelector(".selected").textContent
-    console.log(selectedQuiz)
-    if (!selectedQuiz == false) {
+    } else {
+      selectedQuiz = document.querySelector(".selected").textContent
       history.pushState(null, null, '/highscore')
       router()
-    }}
-   
-
+    }
   })
 
   document.querySelector("#startButton").addEventListener("click", function () {
-      if(selectedQuiz==false){
+    let temp = document.querySelector(".selected")
+    if (temp == null) {
       alert("Please select a quiz before attempting to start it!")
-    }else{
-            selectedQuiz = document.querySelector(".selected").textContent     
-            console.log(selectedQuiz)
-          if (!selectedQuiz == false) {
-           history.pushState(null, null, '/question')
-          router()
-          }}
-    
-
-  })
-  document.querySelector("#downloadButton").addEventListener("click", function () {
-    if(selectedQuiz==false){
-              alert("Please select a quiz before attempting to download it")
-    } else{
-      
+    } else {
       selectedQuiz = document.querySelector(".selected").textContent
-   
-    storeQuiz(selectedQuiz)
-    console.log("You downloaded: "+selectedQuiz)}
-    
-    
+      history.pushState(null, null, '/question')
+      router()
+    }
+  })
 
+  document.querySelector("#downloadButton").addEventListener("click", function () {
+    let temp = document.querySelector(".selected")
+    if (temp == null) {
+      alert("Please select a quiz before attempting to download it")
+    } else {
+      selectedQuiz = document.querySelector(".selected").textContent
+      storeQuiz(selectedQuiz)
+    }
   })
 
 }
@@ -134,16 +120,16 @@ function getCurrentQuiz() {
 
 async function storeQuiz(quizId) {
   let result = {}
-    try {
-      result = await (await fetch(`/api/quiz/${quizId}`, {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
-      })).json()
-      } catch (error) {
-      console.error(error)
-    }
-    console.log(result)
-    window.localStorage.setItem(quizId,
-      JSON.stringify(result['quizzes'])
-    )
+  try {
+    result = await (await fetch(`/api/quiz/${quizId}`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    })).json()
+  } catch (error) {
+    console.error(error)
+  }
+  console.log(result)
+  window.localStorage.setItem(quizId,
+    JSON.stringify(result['quizzes'])
+  )
 }
